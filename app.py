@@ -18,8 +18,8 @@ html, body, [class*="css"] {
     font-family: Arial, sans-serif;
 }
 .stApp {
-    background: linear-gradient(180deg, #0b1220 0%, #111827 100%);
-    color: #f3f4f6;
+    background: linear-gradient(180deg, #f8fafc 0%, #eef4ff 100%);
+    color: #1f2937;
 }
 .block-container {
     padding-top: 1.2rem;
@@ -27,72 +27,76 @@ html, body, [class*="css"] {
     max-width: 1200px;
 }
 h1, h2, h3 {
-    color: #f9fafb !important;
+    color: #0f172a !important;
 }
 .card {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.10);
+    background: #ffffff;
+    border: 1px solid #dbeafe;
     border-radius: 18px;
     padding: 18px 20px;
     margin-bottom: 16px;
-    box-shadow: 0 6px 24px rgba(0,0,0,0.18);
+    box-shadow: 0 6px 20px rgba(148, 163, 184, 0.12);
 }
 .hero {
-    background: linear-gradient(135deg, #1d4ed8 0%, #0ea5e9 100%);
+    background: linear-gradient(135deg, #2563eb 0%, #60a5fa 100%);
     border-radius: 22px;
     padding: 22px;
     color: white;
     margin-bottom: 16px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.22);
 }
 .metric-card {
-    background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
-    border: 1px solid rgba(255,255,255,0.08);
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
     border-radius: 18px;
     padding: 16px;
     text-align: center;
     min-height: 110px;
+    box-shadow: 0 4px 14px rgba(148, 163, 184, 0.10);
 }
 .metric-label {
     font-size: 0.92rem;
-    color: #cbd5e1;
+    color: #64748b;
     margin-bottom: 8px;
 }
 .metric-value {
     font-size: 1.6rem;
     font-weight: 800;
-    color: #f9fafb;
+    color: #0f172a;
 }
 .good-box {
-    background: rgba(34,197,94,0.12);
+    background: #ecfdf5;
     border-left: 6px solid #22c55e;
     border-radius: 12px;
     padding: 14px 16px;
     margin-top: 12px;
+    color: #166534;
 }
 .bad-box {
-    background: rgba(239,68,68,0.12);
+    background: #fef2f2;
     border-left: 6px solid #ef4444;
     border-radius: 12px;
     padding: 14px 16px;
     margin-top: 12px;
+    color: #991b1b;
 }
 .neutral-box {
-    background: rgba(59,130,246,0.12);
+    background: #eff6ff;
     border-left: 6px solid #3b82f6;
     border-radius: 12px;
     padding: 14px 16px;
     margin-top: 12px;
+    color: #1d4ed8;
 }
 .option-box {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.09);
+    background: #f8fbff;
+    border: 1px solid #dbeafe;
     border-radius: 14px;
     padding: 14px;
     min-height: 130px;
 }
 .small-note {
-    color: #cbd5e1;
+    color: #475569;
     font-size: 0.95rem;
 }
 .big-title {
@@ -104,6 +108,7 @@ h1, h2, h3 {
     font-size: 1.2rem;
     font-weight: 800;
     margin-bottom: 10px;
+    color: #0f172a;
 }
 .tag {
     display: inline-block;
@@ -114,10 +119,25 @@ h1, h2, h3 {
     margin-right: 6px;
     margin-bottom: 6px;
 }
-.tag-blue { background: rgba(59,130,246,0.18); color: #bfdbfe; }
-.tag-red { background: rgba(239,68,68,0.18); color: #fecaca; }
-.tag-yellow { background: rgba(245,158,11,0.18); color: #fde68a; }
-.tag-green { background: rgba(34,197,94,0.18); color: #bbf7d0; }
+.tag-blue { background: #dbeafe; color: #1d4ed8; }
+.tag-red { background: #fee2e2; color: #dc2626; }
+.tag-yellow { background: #fef3c7; color: #d97706; }
+.tag-green { background: #dcfce7; color: #16a34a; }
+.explain-box {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 14px;
+    min-height: 150px;
+}
+.stRadio label, .stMarkdown, .stTextInput label {
+    color: #1f2937 !important;
+}
+div[data-testid="stButton"] button {
+    border-radius: 12px;
+    font-weight: 700;
+    border: 1px solid #93c5fd;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -504,6 +524,42 @@ if st.session_state.round_index >= len(ROUNDS):
                 """,
                 unsafe_allow_html=True
             )
+
+    st.markdown('<div class="card">', unsafe_allow_html=True)
+    st.markdown('<div class="section-title">What These Results Mean</div>', unsafe_allow_html=True)
+
+    e1, e2 = st.columns(2)
+    with e1:
+        st.markdown("""
+        <div class="explain-box">
+            <b>Final Wealth Score</b><br><br>
+            This is your total score at the end of the game. It reflects the overall financial outcome of your decisions. A higher score means you managed the game more successfully in pure point terms.
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown("""
+        <div class="explain-box">
+            <b>Bias Score</b><br><br>
+            This shows how many times your decisions matched classic Prospect Theory traps. A higher Bias Score means your choices were more strongly influenced by psychological patterns such as loss aversion, framing, or break-even chasing.
+        </div>
+        """, unsafe_allow_html=True)
+
+    with e2:
+        st.markdown("""
+        <div class="explain-box">
+            <b>Best Score Reached</b><br><br>
+            This is the highest score you achieved at any point during the game. If your final score is lower than this number, it means you were in a stronger position earlier but later decisions reduced your result.
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown("""
+        <div class="explain-box">
+            <b>Final Zone</b><br><br>
+            This tells you where you ended relative to your starting benchmark. <b>Gain Zone</b> means you finished above your reference point, <b>Loss Zone</b> means below it, and <b>Neutral Zone</b> means very close to the starting level.
+        </div>
+        """, unsafe_allow_html=True)
+
+    st.markdown("</div>", unsafe_allow_html=True)
 
     st.markdown('<div class="card">', unsafe_allow_html=True)
     st.markdown('<div class="section-title">Your Behavioral Profile</div>', unsafe_allow_html=True)
